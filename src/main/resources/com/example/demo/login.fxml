@@ -7,7 +7,6 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -25,13 +24,26 @@
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="0.0" />
             </columnConstraints>
             <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <VBox fillWidth="false" scaleShape="false">
+         <VBox alignment="CENTER" prefHeight="0.0" prefWidth="300.0">
+            <children>
+               <Button fx:id="visitorBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onGuessButtonClick" styleClass="visitor-btn" text="Continue as guess">
+                  <VBox.margin>
+                     <Insets bottom="12.0" />
+                  </VBox.margin></Button>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Or">
+                  <font>
+                     <Font size="18.0" />
+                  </font></Text>
+            </children>
+         </VBox>
+            <VBox fillWidth="false" scaleShape="false" GridPane.rowIndex="1">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
@@ -46,12 +58,12 @@
                     </font>
                 </Text>
             </VBox>
-            <VBox GridPane.rowIndex="1">
+            <VBox GridPane.rowIndex="2">
                 <Label prefHeight="17.0" prefWidth="300.0" styleClass="label-text" text="Email" />
                 <TextField fx:id="emailTextField" maxWidth="300.0" prefHeight="25.0" promptText="Enter your email" styleClass="input" GridPane.columnIndex="0" />
                 <Label fx:id="emailStatus" textFill="#ff7878" visible="false" />
             </VBox>
-            <VBox GridPane.rowIndex="2">
+            <VBox GridPane.rowIndex="3">
                 <Label prefHeight="17.0" prefWidth="200.0" styleClass="label-text" text="Password" />
                 <StackPane>
                     <children>
@@ -71,8 +83,8 @@
                     </VBox.margin>
                 </CheckBox>
             </VBox>
-            <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="31.0" text="Login" GridPane.rowIndex="4" />
-            <VBox fx:id="roleVBox" spacing="4.0" GridPane.rowIndex="3">
+            <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="31.0" styleClass="button-main" text="Login" GridPane.rowIndex="5" />
+            <VBox fx:id="roleVBox" spacing="4.0" GridPane.rowIndex="4">
                 <children>
                     <HBox alignment="BASELINE_LEFT">
                         <children>
@@ -95,9 +107,9 @@
                         </rowConstraints>
                         <children>
                             <RadioButton fx:id="hostRadioButton" maxWidth="1.7976931348623157E308" text="Host" />
-                            <RadioButton fx:id="ownerRadioButton" maxWidth="1.7976931348623157E308" text="Owner"  GridPane.rowIndex="1" />
-                            <RadioButton fx:id="guestRadioButton" maxWidth="1.7976931348623157E308" text="Guest" GridPane.columnIndex="1"/>
-                            <RadioButton fx:id="managerRadioButton" maxWidth="1.7976931348623157E308" text="Manager"  GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <RadioButton fx:id="ownerRadioButton" maxWidth="1.7976931348623157E308" text="Owner" GridPane.rowIndex="1" />
+                            <RadioButton fx:id="guestRadioButton" maxWidth="1.7976931348623157E308" text="Guest" GridPane.columnIndex="1" />
+                            <RadioButton fx:id="managerRadioButton" maxWidth="1.7976931348623157E308" text="Manager" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         </children>
                     </GridPane>
                 </children>
@@ -105,7 +117,6 @@
                     <Insets bottom="24.0" />
                 </GridPane.margin>
             </VBox>
-
 
         </GridPane>
     </children>

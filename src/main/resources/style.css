@@ -86,11 +86,26 @@ img {
 }
 
 
-.button {
+.button-main {
     -fx-padding: 8px 16px;
     -fx-background-color: black;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+}
+
+.visitor-btn {
+    -fx-padding: 8px 16px;
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-radius: 4px;
+    -fx-font-weight: regular ;
+    -fx-border-color: lightgrey;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+.visitor-btn:hover {
+    -fx-background-color: #f5f5f5;
 }
 
 .button:hover {
@@ -100,3 +115,4 @@ img {
 .error-text {
     -fx-text-fill: #ff7878;
 }
+

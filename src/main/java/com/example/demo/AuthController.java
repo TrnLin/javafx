@@ -2,9 +2,14 @@ package com.example.demo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class AuthController {
 
@@ -17,6 +22,7 @@ public class AuthController {
     public RadioButton managerRadioButton;
     public TextField emailTextField;
     public Label emailStatus;
+    public Button visitorBtn;
 
     @FXML
     private VBox roleVBox; // Reference to the VBox containing the RadioButtons
@@ -69,7 +75,7 @@ public class AuthController {
         });
     }
 
-    public void onLoginButtonClick(ActionEvent event) {
+    public void onLoginButtonClick(ActionEvent event) throws Exception {
         try {
             var email = emailTextField.getText();
             var password = passwordField.isVisible() ? passwordField.getText() : passwordTextField.getText();
@@ -119,6 +125,22 @@ public class AuthController {
 
             //TODO: Perform login logic here
 
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/home.fxml"));
+                Scene scene = new Scene(root);
+                Stage primaryStage = new Stage();
+                scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+                primaryStage.setScene(scene);
+                primaryStage.setTitle("Visitor");
+                primaryStage.show();
+                ((Node) event.getSource()).getScene().getWindow().hide();
+            } catch (Exception e) {
+                // Handle general exceptions
+                status.setVisible(true);
+                status.setText("An unexpected error occurred. Please try again.");
+                System.err.println("Error: " + e.getMessage());
+                e.printStackTrace();
+            }
         } catch (NullPointerException e) {
             // Handle cases where getSelectedToggle() or other potentially null objects might throw NullPointerException
             status.setVisible(true);
@@ -131,6 +153,26 @@ public class AuthController {
             status.setText("An unexpected error occurred. Please try again.");
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    public void onGuessButtonClick(ActionEvent event) throws Exception {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/visitor.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage = new Stage();
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Visitor");
+            primaryStage.show();
+            ((Node) event.getSource()).getScene().getWindow().hide();
+        } catch (Exception e) {
+            // Handle general exceptions
+            status.setVisible(true);
+            status.setText("An unexpected error occurred. Please try again.");
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+
         }
     }
 

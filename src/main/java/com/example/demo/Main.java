@@ -14,12 +14,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/login.fxml"));
-
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Hello!");
+            primaryStage.setTitle("Login");
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
