@@ -13,41 +13,29 @@ import javafx.stage.Stage;
 public class SignInController {
 
     @FXML
+    public final ToggleGroup roleToggleGroup = new ToggleGroup();
+    @FXML
     public RadioButton hostRadioButton;
-
     @FXML
     public RadioButton ownerRadioButton;
-
     @FXML
     public RadioButton guestRadioButton;
-
     @FXML
     public Text status;
-
     @FXML
     public Button loginBtn;
-
     @FXML
     public Text roleStatus;
-
     @FXML
     public RadioButton managerRadioButton;
-
     @FXML
     public TextField emailTextField;
-
     @FXML
     public Label emailStatus;
-
     @FXML
     public Button visitorBtn;
-
     @FXML
     public Button toSignUpViewBtn;
-
-    @FXML
-    public final ToggleGroup roleToggleGroup = new ToggleGroup();
-
     @FXML// ToggleGroup for role management
     public Button signUpBtn;
 
@@ -141,30 +129,8 @@ public class SignInController {
             if (hasError) {
                 return;
             }
-
-            // Log role, email, and password (for debugging or logging purposes)
-            System.out.println("Role: " + selectedRole);
-            System.out.println("Email: " + email);
-            System.out.println("Password: " + password);
-
             //TODO: Perform login logic here
-
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/home.fxml"));
-                Scene scene = new Scene(root);
-                Stage primaryStage = new Stage();
-                scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                primaryStage.setScene(scene);
-                primaryStage.setTitle("Visitor");
-                primaryStage.show();
-//                ((Node) event.getSource()).getScene().getWindow().hide();
-            } catch (Exception e) {
-                // Handle general exceptions
-                status.setVisible(true);
-                status.setText("An unexpected error occurred. Please try again.");
-                System.err.println("Error: " + e.getMessage());
-                e.printStackTrace();
-            }
+            login(email, password, selectedRole, event);
         } catch (NullPointerException e) {
             // Handle cases where getSelectedToggle() or other potentially null objects might throw NullPointerException
             status.setVisible(true);
@@ -218,6 +184,51 @@ public class SignInController {
 
     }
 
+    public void login(String email, String password, String selectedRole, ActionEvent event) {
+        // Assuming you have a UserService to handle user authentication
+//        UserService userService = new UserService();
+        try {
+//            User user = userService.authenticateUser(email, password, role);
+//            if (user != null) {
+//                System.out.println("Login successful: " + email);
+//                // Redirect to the home page or dashboard
+//                redirectToHomePage();
+//            } else {
+//                System.err.println("Invalid email, password, or role");
+//                status.setVisible(true);
+//                status.setText("Invalid email, password, or role. Please try again.");
+//            }
+
+            // Log role, email, and password (for debugging or logging purposes)
+            System.out.println("Role: " + selectedRole);
+            System.out.println("Email: " + email);
+            System.out.println("Password: " + password);
+            redirectToHomePage(event);
+        } catch (Exception e) {
+            System.err.println("Error during login: " + e.getMessage());
+            e.printStackTrace();
+            status.setVisible(true);
+            status.setText("An unexpected error occurred. Please try again.");
+        }
+    }
+
+    private void redirectToHomePage(ActionEvent event) {
+        // Implement the logic to redirect to the home page or dashboard
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/home.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            // Handle general exceptions
+            status.setVisible(true);
+            status.setText("An unexpected error occurred. Please try again.");
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 }
 

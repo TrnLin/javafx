@@ -1,122 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-
-<FlowPane alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AuthController">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<FlowPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="800.0" prefWidth="1200.0"
+          xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.demo.SignInController">
     <children>
         <GridPane hgap="10.0" styleClass="form-container" vgap="10.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="0.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="0.0"/>
             </columnConstraints>
             <rowConstraints>
-            <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-         <VBox alignment="CENTER" prefHeight="0.0" prefWidth="300.0">
-            <children>
-               <Button fx:id="visitorBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onGuessButtonClick" styleClass="visitor-btn" text="Continue as guess">
-                  <VBox.margin>
-                     <Insets bottom="12.0" />
-                  </VBox.margin></Button>
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Or">
-                  <font>
-                     <Font size="18.0" />
-                  </font></Text>
-            </children>
-         </VBox>
+            <VBox alignment="CENTER" prefHeight="0.0" prefWidth="300.0" GridPane.rowIndex="7">
+                <children>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Or">
+                        <font>
+                            <Font size="18.0"/>
+                        </font>
+                        <VBox.margin>
+                            <Insets bottom="8.0"/>
+                        </VBox.margin>
+                    </Text>
+                    <Button fx:id="visitorBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                            onAction="#onGuessButtonClick" styleClass="visitor-btn" text="Continue as visitor">
+                        <VBox.margin>
+                            <Insets bottom="12.0"/>
+                        </VBox.margin>
+                    </Button>
+                </children>
+            </VBox>
             <VBox fillWidth="false" scaleShape="false" GridPane.rowIndex="1">
                 <opaqueInsets>
-                    <Insets />
+                    <Insets/>
                 </opaqueInsets>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-1" text="Login">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Text>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="normal-text" text="Fill in the form to login">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Text>
             </VBox>
             <VBox GridPane.rowIndex="2">
-                <Label prefHeight="17.0" prefWidth="300.0" styleClass="label-text" text="Email" />
-                <TextField fx:id="emailTextField" maxWidth="300.0" prefHeight="25.0" promptText="Enter your email" styleClass="input" GridPane.columnIndex="0" />
-                <Label fx:id="emailStatus" textFill="#ff7878" visible="false" />
+                <Label prefHeight="17.0" prefWidth="300.0" styleClass="label-text" text="Email"/>
+                <TextField fx:id="emailTextField" maxWidth="300.0" prefHeight="25.0" promptText="Enter your email"
+                           styleClass="input" GridPane.columnIndex="0"/>
+                <Label fx:id="emailStatus" textFill="#ff7878" visible="false"/>
             </VBox>
             <VBox GridPane.rowIndex="3">
-                <Label prefHeight="17.0" prefWidth="200.0" styleClass="label-text" text="Password" />
+                <Label prefHeight="17.0" prefWidth="200.0" styleClass="label-text" text="Password"/>
                 <StackPane>
                     <children>
                         <!-- PasswordField (for hidden password input) -->
-                        <PasswordField fx:id="passwordField" depthTest="ENABLE" maxWidth="1.7976931348623157E308" promptText="Enter your password" styleClass="input" />
+                        <PasswordField fx:id="passwordField" depthTest="ENABLE" maxWidth="1.7976931348623157E308"
+                                       promptText="Enter your password" styleClass="input"/>
 
                         <!-- TextField (for showing plain text password) -->
-                        <TextField fx:id="passwordTextField" depthTest="ENABLE" maxWidth="1.7976931348623157E308" promptText="Enter your password" styleClass="input" visible="false" />
+                        <TextField fx:id="passwordTextField" depthTest="ENABLE" maxWidth="1.7976931348623157E308"
+                                   promptText="Enter your password" styleClass="input" visible="false"/>
                     </children>
                 </StackPane>
-                <Text fx:id="status" fill="#ff7878" fontSmoothingType="LCD" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="test" visible="false" />
+                <Text fx:id="status" fill="#ff7878" fontSmoothingType="LCD" smooth="false" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="test" visible="false"/>
 
                 <!-- CheckBox for toggling password visibility -->
                 <CheckBox fx:id="showPasswordCheckBox" text="Show Password">
                     <VBox.margin>
-                        <Insets top="8.0" />
+                        <Insets top="8.0"/>
                     </VBox.margin>
                 </CheckBox>
             </VBox>
-            <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="31.0" styleClass="button-main" text="Login" GridPane.rowIndex="5" />
-            <VBox fx:id="roleVBox" spacing="4.0" GridPane.rowIndex="4">
+            <Button fx:id="loginBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                    onAction="#onLoginButtonClick" prefHeight="31.0" styleClass="button-main" text="Login"
+                    GridPane.rowIndex="6"/>
+            <VBox fx:id="roleVBox" spacing="4.0" GridPane.rowIndex="5">
                 <children>
                     <HBox alignment="BASELINE_LEFT">
                         <children>
                             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Your Role">
                                 <HBox.margin>
-                                    <Insets right="12.0" />
+                                    <Insets right="12.0"/>
                                 </HBox.margin>
                             </Text>
-                            <Text fx:id="roleStatus" fill="#ff7878" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+                            <Text fx:id="roleStatus" fill="#ff7878" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
+                                  visible="false"/>
                         </children>
                     </HBox>
                     <GridPane hgap="10.0" vgap="10.0">
                         <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                         </columnConstraints>
                         <rowConstraints>
-                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                            <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                         </rowConstraints>
                         <children>
-                            <RadioButton fx:id="hostRadioButton" maxWidth="1.7976931348623157E308" text="Host" />
-                            <RadioButton fx:id="ownerRadioButton" maxWidth="1.7976931348623157E308" text="Owner" GridPane.rowIndex="1" />
-                            <RadioButton fx:id="guestRadioButton" maxWidth="1.7976931348623157E308" text="Guest" GridPane.columnIndex="1" />
-                            <RadioButton fx:id="managerRadioButton" maxWidth="1.7976931348623157E308" text="Manager" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <RadioButton fx:id="hostRadioButton" maxWidth="1.7976931348623157E308" text="Host"/>
+                            <RadioButton fx:id="ownerRadioButton" maxWidth="1.7976931348623157E308" text="Owner"
+                                         GridPane.rowIndex="1"/>
+                            <RadioButton fx:id="guestRadioButton" maxWidth="1.7976931348623157E308" text="Tenant"
+                                         GridPane.columnIndex="1"/>
+                            <RadioButton fx:id="managerRadioButton" maxWidth="1.7976931348623157E308" text="Manager"
+                                         GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                         </children>
                     </GridPane>
                 </children>
                 <GridPane.margin>
-                    <Insets bottom="24.0" />
+                    <Insets bottom="24.0"/>
                 </GridPane.margin>
             </VBox>
+            <FlowPane alignment="CENTER_RIGHT" prefWrapLength="300.0" GridPane.rowIndex="4">
+                <children>
+                    <Button fx:id="toSignUpViewBtn" mnemonicParsing="false" onAction="#onSignUpViewBtnClick"
+                            styleClass="button-link" text="Don't have an account? Sign up">
+                        <FlowPane.margin>
+                            <Insets bottom="8.0" top="8.0"/>
+                        </FlowPane.margin>
+                    </Button>
+                </children>
+            </FlowPane>
 
         </GridPane>
     </children>

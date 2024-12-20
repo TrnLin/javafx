@@ -104,6 +104,20 @@ img {
     -fx-border-style: solid;
 }
 
+.button-link{
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-border: none;
+    -fx-font-size: 14px;
+    -fx-underline: true;
+    -fx-padding: 0;
+
+}
+
+.button-link:hover {
+    -fx-underline: false;
+}
+
 .visitor-btn:hover {
     -fx-background-color: #f5f5f5;
 }
