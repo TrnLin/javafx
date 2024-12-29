@@ -93,7 +93,7 @@ img {
     -fx-font-weight: bold;
 }
 
-.visitor-btn {
+.button-second {
     -fx-padding: 8px 16px;
     -fx-background-color: white;
     -fx-text-fill: black;
@@ -118,7 +118,7 @@ img {
     -fx-underline: false;
 }
 
-.visitor-btn:hover {
+.button-second:hover {
     -fx-background-color: #f5f5f5;
 }
 
@@ -130,3 +130,34 @@ img {
     -fx-text-fill: #ff7878;
 }
 
+.dropdown-list {
+    -fx-min-width: 300px;
+    -fx-padding: 8px 0px;
+    -fx-border-radius: 4px;
+    -fx-background-color: white;
+    -fx-border-color: lightgrey;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-font-size: 14px;
+}
+
+.table-view {
+    -fx-padding: 8px;
+    -fx-border-radius: 4px;
+    -fx-background-color: white;
+    -fx-border-color: lightgrey;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-min-height: 700px;
+}
+
+.table-column {
+    -fx-alignment: center; /* Center align text */
+    -fx-background-color: #fff;
+    -fx-padding: 8px;
+    -fx-text-fill: #333333; /* Dark gray text color */
+    -fx-border-color: lightgrey; /* Border color */
+    -fx-border-width: 0 0 1px 0; /* Border width: top right bottom left */
+    -fx-border-style: solid; /* Border style */
+    -fx-min-width: 100%;
+}

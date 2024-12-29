@@ -1,0 +1,21 @@
+parking_spaces,property_id,square_footage,business_type
+15,21,3500,Retail Store
+30,22,12000,Office Building
+10,23,2500,Restaurant
+20,24,20000,Warehouse
+50,25,50000,Shopping Mall
+5,26,1500,Coffee Shop
+100,27,35000,Hotel
+10,28,4000,Gym
+40,29,8000,Car Dealership
+20,30,6000,Bank
+25,31,10000,Co-working Space
+8,32,3000,Clinic
+60,33,15000,Cinema
+15,34,2500,Restaurant (Fast Food)
+30,35,20000,Supermarket
+10,36,8000,Tech Startup Hub
+50,37,25000,Warehouse (Cold Storage)
+8,38,4000,Law Firm Office
+20,39,12000,Medical Center
+10,40,4500,Electronics Store
