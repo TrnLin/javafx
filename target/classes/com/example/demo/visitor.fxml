@@ -55,6 +55,18 @@
                     </TableView>
                 </children>
             </VBox>
+            <VBox>
+                <children>
+                    <TableView fx:id="resPropertyTable" visible="false" managed="false">
+                        <columns>
+
+                        </columns>
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                    </TableView>
+                </children>
+            </VBox>
 
 
 

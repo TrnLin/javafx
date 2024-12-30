@@ -6,13 +6,14 @@ public class ResidentialProperty extends Property {
     int bedrooms;
     boolean hasGarden;
     int propertyId;
-    PetFriendlyLevel isPetFriendly;
+    String petFriendlyLevel;
 
-    public ResidentialProperty(int ownerId, float pricing, int propertyId, String address, String status, int bedrooms, boolean hasGarden, PetFriendlyLevel isPetFriendly) {
+    public ResidentialProperty(int ownerId, float pricing, int propertyId, String address, String status, int bedrooms, boolean hasGarden, String petFriendlyLevel) {
         super(ownerId, pricing, propertyId, address, status);
+        this.propertyId = propertyId;
         this.bedrooms = bedrooms;
         this.hasGarden = hasGarden;
-        this.isPetFriendly = isPetFriendly;
+        this.petFriendlyLevel = petFriendlyLevel;
     }
 
     public int getBedrooms() {
@@ -39,21 +40,20 @@ public class ResidentialProperty extends Property {
         this.propertyId = propertyId;
     }
 
-    public PetFriendlyLevel getIsPetFriendly() {
-        return isPetFriendly;
+    public String getPetFriendlyLevel() {
+        return petFriendlyLevel;
     }
 
-    public void setIsPetFriendly(PetFriendlyLevel isPetFriendly) {
-        this.isPetFriendly = isPetFriendly;
+    public void setPetFriendlyLevel(String petFriendlyLevel) {
+        this.petFriendlyLevel = petFriendlyLevel;
     }
-
     @Override
     public String toString() {
         return "ResidentialProperty{" +
                 "bedrooms=" + bedrooms +
                 ", hasGarden=" + hasGarden +
                 ", propertyId=" + propertyId +
-                ", isPetFriendly='" + isPetFriendly + '\'' +
+                ", isPetFriendly='" + petFriendlyLevel + '\'' +
                 '}';
     }
 
