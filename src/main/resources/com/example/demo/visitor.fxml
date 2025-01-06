@@ -31,6 +31,7 @@
 
             </children>
         </HBox>
+        <VBox>
             <VBox>
                 <children>
                     <TableView fx:id="propertyTable">
@@ -67,7 +68,7 @@
                     </TableView>
                 </children>
             </VBox>
-
+        </VBox>
 
 
     </children>
