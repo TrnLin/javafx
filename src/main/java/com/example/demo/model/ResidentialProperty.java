@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.stric.PetFriendlyLevel;
 
 public class ResidentialProperty extends Property {
     int bedrooms;
