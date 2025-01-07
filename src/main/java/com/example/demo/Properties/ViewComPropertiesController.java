@@ -2,11 +2,17 @@ package com.example.demo.Properties;
 
 import com.example.demo.model.CommercialProperty;
 import com.example.demo.model.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,23 +27,47 @@ public class ViewComPropertiesController {
     public ChoiceBox viewOptions;
     public RadioButton statusAvailable;
     public RadioButton statusRented;
-    public RadioButton statusUnderMaintenace;
+    public RadioButton statusUnderMaintenance;
     public Button resetFilterBtn;
+    public Button test;
+    public Button filterBtn;
+    public Button cancelFilterBtn;
+    public TextField businessTypeInput;
+    public TextField squareFootageFrom;
+    public TextField squareFootageTo;
+    public RadioButton statusAll;
+
     ObservableList<CommercialProperty> commercialProperties = FXCollections.observableArrayList();
     ObservableList<Property> properties = FXCollections.observableArrayList();
+    ObservableList<CommercialProperty> filteredProperties = FXCollections.observableArrayList();
 
     public void initialize() {
-        properties = readPropertiesFromFileProperty();
-        commercialProperties = readPropertiesFromFileCommercial();
-
         //set up the status radio buttons
         statusAvailable.setToggleGroup(statusToggleGroup);
         statusRented.setToggleGroup(statusToggleGroup);
-        statusUnderMaintenace.setToggleGroup(statusToggleGroup);
+        statusUnderMaintenance.setToggleGroup(statusToggleGroup);
+        statusAll.setToggleGroup(statusToggleGroup);
 
+
+        // Set user data for the radio buttons
+        statusAll.setUserData("ALL");
         statusAvailable.setUserData("AVAILABLE");
         statusRented.setUserData("RENTED");
-        statusUnderMaintenace.setUserData("UNDER_MAINTENANCE");
+        statusUnderMaintenance.setUserData("UNDER_MAINTENANCE");
+
+        // Set user data for the radio buttons
+        statusToggleGroup.selectToggle(statusAll);
+
+        // Add listener to search button
+        searchInput.setOnAction(event -> searchProperties(new ActionEvent()));
+
+        // Add listener to ChoiceBox
+        viewOptions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                viewOptions(newValue);
+            }
+        });
 
         // Commercial Property Table
         TableColumn<CommercialProperty, Integer> comPropertyIdCol = new TableColumn<>("Property ID");
@@ -73,9 +103,13 @@ public class ViewComPropertiesController {
         comBusinessTypeCol.setCellValueFactory(new PropertyValueFactory<>("businessType"));
         comBusinessTypeCol.getStyleClass().add("table-column");
 
-
+        // Add columns to the TableView
         comPropertyTable.getColumns().addAll(comPropertyIdCol, comOwnerIdCol, comPricingCol, comAddressCol, comStatusCol, comParkingSpaceCol, comSquareFootageCol, comBusinessTypeCol);
 
+        // Load data from the file and display in the table
+        properties = readPropertiesFromFileProperty();
+
+        // Set the items in the table
         ObservableList<CommercialProperty> commercialProperties = readPropertiesFromFileCommercial();
         comPropertyTable.setItems(commercialProperties);
     }
@@ -101,13 +135,11 @@ public class ViewComPropertiesController {
                 properties.add(property);
             }
 
-            System.out.println("Properties loaded: " + properties.size());
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
         return properties;
     }
-
 
     private ObservableList<CommercialProperty> readPropertiesFromFileCommercial() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/java/com/example/demo/data/commercial_properties_rows(in).csv"))) {
@@ -121,8 +153,6 @@ public class ViewComPropertiesController {
                 int propertyId = Integer.parseInt(parts[1]);
                 int squareFootage = Integer.parseInt(parts[2]);
                 String businessType = parts[3];
-
-                System.out.println(propertyId);
 
                 for (Property property : properties) {
                     if (property.getPropertyId() == propertyId) {
@@ -142,32 +172,132 @@ public class ViewComPropertiesController {
     }
 
     public void searchProperties(ActionEvent event) {
+        String search = searchInput.getText();
+        ObservableList<CommercialProperty> searchResult = FXCollections.observableArrayList();
+
+        // Search for the address in the commercial properties
+        for (CommercialProperty commercialProperty : commercialProperties) {
+            if (commercialProperty.getAddress().toLowerCase().contains(search.toLowerCase())) {
+                searchResult.add(commercialProperty);
+            }
+        }
+
+        if (searchResult.isEmpty()) {
+            System.out.println("No results found");
+        } else {
+            comPropertyTable.setItems(searchResult);
+            cancelBtn.setVisible(true);
+        }
+
     }
 
     public void resetTable(ActionEvent event) {
+        comPropertyTable.setItems(commercialProperties);
+        cancelBtn.setVisible(false);
+        searchInput.clear();
     }
 
-    public void getStatusFilter(ActionEvent event) {
-        RadioButton selectedRadioButton = (RadioButton) statusToggleGroup.getSelectedToggle();
-        String status = (String) selectedRadioButton.getUserData();
-        filterProperties(status);
-    }
-
-    public void filterProperties(String status) {
+    public void filterBtnClicked(ActionEvent event) {
         ObservableList<CommercialProperty> filteredProperties = FXCollections.observableArrayList();
-        for (Property property : properties) {
+
+        String status = getStatus() != null ? getStatus() : "";
+        String type = getBusinessType() != null ? getBusinessType() : "";
+        int squareFootageFrom = getSquareFootageFrom();
+        int squareFootageTo = getSquareFootageTo();
+
+
+        if (status.equals("ALL")) {
             for (CommercialProperty commercialProperty : commercialProperties) {
-                if (property.getPropertyId() == commercialProperty.getPropertyId() && property.getStatus().equals(status)) {
+                if (commercialProperty.getBusinessType().toLowerCase().contains(type.toLowerCase()) && commercialProperty.getSquareFootage() >= squareFootageFrom && commercialProperty.getSquareFootage() <= squareFootageTo) {
+                    filteredProperties.add(commercialProperty);
+                }
+            }
+        } else {
+            for (CommercialProperty commercialProperty : commercialProperties) {
+                if (commercialProperty.getBusinessType().toLowerCase().contains(type.toLowerCase()) && commercialProperty.getSquareFootage() >= squareFootageFrom && commercialProperty.getSquareFootage() <= squareFootageTo && commercialProperty.getStatus().equals(status)) {
                     filteredProperties.add(commercialProperty);
                 }
             }
         }
+
         comPropertyTable.setItems(filteredProperties);
-        resetFilterBtn.setVisible(true);
+        cancelFilterBtn.setVisible(true);
+
     }
 
-    public void resetFilter(ActionEvent event) {
+    public void cancelFilterBtnClicked(ActionEvent event) {
         comPropertyTable.setItems(commercialProperties);
-        resetFilterBtn.setVisible(false);
+        statusToggleGroup.selectToggle(statusAll);
+        cancelFilterBtn.setVisible(false);
+        businessTypeInput.clear();
+        squareFootageFrom.clear();
+        squareFootageTo.clear();
+    }
+
+    public String getBusinessType() {
+        return businessTypeInput.getText();
+    }
+
+    public int getSquareFootageFrom() {
+        return squareFootageFrom.getText().isEmpty() ? 0 : Integer.parseInt(squareFootageFrom.getText());
+    }
+
+    public int getSquareFootageTo() {
+        return squareFootageTo.getText().isEmpty() ? 99999999 : Integer.parseInt(squareFootageTo.getText());
+    }
+
+    public String getStatus() {
+        RadioButton selectedRadioButton = (RadioButton) statusToggleGroup.getSelectedToggle();
+        return (String) selectedRadioButton.getUserData();
+    }
+
+    public void viewOptions(String option) {
+        switch (option) {
+            case "All Properties":
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
+                    Stage stage = (Stage) viewOptions.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+                    stage.setTitle("All Properties");
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
+            case "Commercial Properties":
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewComProperties.fxml"));
+                    Stage stage = (Stage) viewOptions.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+                    stage.setScene(scene);
+                    stage.setTitle("Commercial Properties");
+                    stage.show();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
+            case "Residential Properties":
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewResProperties.fxml"));
+                    Stage stage = (Stage) viewOptions.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+                    stage.setTitle("Residential Properties");
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                System.out.println("Invalid option selected");
+                break;
+        }
     }
 }

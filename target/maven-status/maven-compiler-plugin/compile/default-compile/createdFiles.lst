@@ -1,11 +1,4 @@
-com\example\demo\model\CommercialProperty.class
-com\example\demo\model\Property.class
-com\example\demo\Properties\ViewAllPropertiesController.class
-com\example\demo\VisitorController.class
-com\example\demo\model\ResidentialProperty.class
-com\example\demo\SignInController.class
-com\example\demo\SignupController.class
-com\example\demo\Main.class
-com\example\demo\HomeController.class
 module-info.class
-com\example\demo\Properties\ViewComPropertiesController.class
+com/example/demo/Properties/ViewAllPropertiesController$1.class
+com/example/demo/Properties/ViewResPropertiesController.class
+com/example/demo/Properties/ViewResPropertiesController$1.class

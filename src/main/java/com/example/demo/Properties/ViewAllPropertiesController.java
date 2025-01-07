@@ -1,11 +1,17 @@
 package com.example.demo.Properties;
 
 import com.example.demo.model.Property;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,8 +26,9 @@ public class ViewAllPropertiesController {
     public ChoiceBox viewOptions;
     public RadioButton statusAvailable;
     public RadioButton statusRented;
-    public RadioButton statusUnderMaintenace;
     public Button resetFilterBtn;
+    public RadioButton statusUnderMaintenance;
+    public RadioButton statusAll;
 
     ObservableList<Property> properties = FXCollections.observableArrayList();
     // Initialize the controller
@@ -33,11 +40,28 @@ public class ViewAllPropertiesController {
         //set up the status radio buttons
         statusAvailable.setToggleGroup(statusToggleGroup);
         statusRented.setToggleGroup(statusToggleGroup);
-        statusUnderMaintenace.setToggleGroup(statusToggleGroup);
+        statusUnderMaintenance.setToggleGroup(statusToggleGroup);
+        statusAll.setToggleGroup(statusToggleGroup);
 
+        // Set user data for the radio buttons
+        statusAll.setUserData("ALL");
         statusAvailable.setUserData("AVAILABLE");
         statusRented.setUserData("RENTED");
-        statusUnderMaintenace.setUserData("UNDER_MAINTENANCE");
+        statusUnderMaintenance.setUserData("UNDER_MAINTENANCE");
+
+        //set default radio button
+        statusToggleGroup.selectToggle(statusAll);
+
+        // Add listener to search button
+        searchInput.setOnAction(event -> searchProperties(new ActionEvent()));
+
+        // Add listener to ChoiceBox
+        viewOptions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                viewOptions(newValue);
+            }
+        });
 
         // Set up the TableView
         TableColumn<Property, Integer> propertyIdCol = new TableColumn<>("Property ID");
@@ -140,6 +164,98 @@ public class ViewAllPropertiesController {
         propertyTable.setItems(properties);
         resetFilterBtn.setVisible(false);
     }
+
+    public void filterBtnClicked(ActionEvent event) {
+        ObservableList<Property> filteredProperties = FXCollections.observableArrayList();
+
+        String status = getStatus() != null ? getStatus() : "";
+
+        switch (status) {
+            case "AVAILABLE":
+                for (Property property : properties) {
+                    if (property.getStatus().equals("AVAILABLE")) {
+                        filteredProperties.add(property);
+                    }
+                }
+                break;
+            case "RENTED":
+                for (Property property : properties) {
+                    if (property.getStatus().equals("RENTED")) {
+                        filteredProperties.add(property);
+                    }
+                }
+                break;
+            case "UNDER_MAINTENANCE":
+                for (Property property : properties) {
+                    if (property.getStatus().equals("UNDER_MAINTENANCE")) {
+                        filteredProperties.add(property);
+                    }
+                }
+                break;
+            default:
+                filteredProperties = properties;
+                break;
+        }
+
+        propertyTable.setItems(filteredProperties);
+    }
+
+    public String getStatus() {
+        RadioButton selectedRadioButton = (RadioButton) statusToggleGroup.getSelectedToggle();
+        return (String) selectedRadioButton.getUserData();
+    }
+
+    public void viewOptions(String option) {
+        switch (option) {
+            case "All Properties":
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
+                    Stage stage = (Stage) viewOptions.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+                    stage.setTitle("All Properties");
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
+            case "Commercial Properties":
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewComProperties.fxml"));
+                    Stage stage = (Stage) viewOptions.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+                    stage.setScene(scene);
+                    stage.setTitle("Commercial Properties");
+                    stage.show();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
+            case "Residential Properties":
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewResProperties.fxml"));
+                    Stage stage = (Stage) viewOptions.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+                    stage.setTitle("Residential Properties");
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                System.out.println("Invalid option selected");
+                break;
+        }
+    }
+
+
 }
 
 

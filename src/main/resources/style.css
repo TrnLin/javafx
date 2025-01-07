@@ -74,7 +74,8 @@ img {
 }
 
 /* button */
-.radio-button {
+.radio-button,
+.checkbox {
     -fx-padding: 8px 8px;
 
     -fx-border-radius: 4px;
@@ -163,4 +164,12 @@ img {
     -fx-border-width: 0 0 1px 0; /* Border width: top right bottom left */
     -fx-border-style: solid; /* Border style */
     -fx-min-width: 100%;
+}
+
+.filter-container {
+    -fx-padding: 18px;
+    -fx-border-color: lightgrey; /* Border color */
+    -fx-border-width: 1px; /* Border width: top right bottom left */
+    -fx-border-radius: 4px;
+    -fx-border-style: solid; /* Border style */
 }

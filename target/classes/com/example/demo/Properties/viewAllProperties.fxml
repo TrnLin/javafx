@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.lang.String?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="1040.0" prefWidth="1440.0" spacing="18.0"
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="1040.0" prefWidth="1440.0" spacing="18.0" maxHeight="1040"
       style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1"
       fx:controller="com.example.demo.Properties.ViewAllPropertiesController">
     <children>
@@ -41,28 +41,31 @@
                 </HBox>
             </children>
         </GridPane>
-        <VBox spacing="8.0">
+        <HBox styleClass="filter-container">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-3" text="Status"/>
-                <HBox spacing="12.0">
+                <VBox spacing="8.0">
                     <children>
-                        <RadioButton fx:id="statusAvailable" mnemonicParsing="false" onAction="#getStatusFilter"
-                                     text="Available"/>
-                        <RadioButton fx:id="statusRented" mnemonicParsing="false" onAction="#getStatusFilter"
-                                     text="Rented "/>
-                        <RadioButton fx:id="statusUnderMaintenace" mnemonicParsing="false" onAction="#getStatusFilter"
-                                     text="Under Maintenance  "/>
-                        <Button fx:id="resetFilterBtn" mnemonicParsing="false" onAction="#resetFilter"
-                                styleClass="button-second" text="Clear" visible="false"/>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header-3" text="Status"/>
+                        <HBox spacing="12.0">
+                            <children>
+                                <RadioButton fx:id="statusAll" mnemonicParsing="false" onAction="#filterBtnClicked"
+                                             text="All"/>
+                                <RadioButton fx:id="statusAvailable" mnemonicParsing="false"
+                                             onAction="#filterBtnClicked" text="Available"/>
+                                <RadioButton fx:id="statusRented" mnemonicParsing="false" onAction="#filterBtnClicked"
+                                             text="Rented "/>
+                                <RadioButton fx:id="statusUnderMaintenance" mnemonicParsing="false"
+                                             onAction="#filterBtnClicked" text="Under Maintenance  "/>
+                            </children>
+                        </HBox>
                     </children>
-                </HBox>
+                </VBox>
             </children>
-        </VBox>
+        </HBox>
         <VBox>
             <children>
                 <TableView fx:id="propertyTable">
                     <columns>
-
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
