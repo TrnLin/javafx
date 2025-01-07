@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Auth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -168,7 +168,7 @@ public class SignInController {
 
     public void onSignUpViewBtnClick(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/signup.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Auth/signup.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());

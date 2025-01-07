@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Auth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -182,7 +182,7 @@ public class SignupController {
 
     public void onLoginViewBtnClick(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Auth/login.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
@@ -201,7 +201,7 @@ public class SignupController {
     public void redirectToLoginPage(ActionEvent event) {
         // Implement the logic to redirect to the login page
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Auth/login.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
