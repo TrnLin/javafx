@@ -148,7 +148,7 @@ public class SignInController {
 
     public void onGuessButtonClick(ActionEvent event) throws Exception {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/visitor.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
             Scene scene = new Scene(root);
             Stage primaryStage = new Stage();
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
@@ -215,7 +215,7 @@ public class SignInController {
     private void redirectToHomePage(ActionEvent event) {
         // Implement the logic to redirect to the home page or dashboard
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
