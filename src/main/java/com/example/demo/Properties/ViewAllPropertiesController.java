@@ -205,6 +205,8 @@ public class ViewAllPropertiesController {
         return (String) selectedRadioButton.getUserData();
     }
 
+    // View Options
+    // Method to view options
     public void viewOptions(String option) {
         switch (option) {
             case "All Properties":

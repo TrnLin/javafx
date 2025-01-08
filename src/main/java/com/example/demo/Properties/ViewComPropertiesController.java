@@ -171,6 +171,7 @@ public class ViewComPropertiesController {
         return commercialProperties;
     }
 
+    // Search Properties
     public void searchProperties(ActionEvent event) {
         String search = searchInput.getText();
         ObservableList<CommercialProperty> searchResult = FXCollections.observableArrayList();
@@ -197,6 +198,8 @@ public class ViewComPropertiesController {
         searchInput.clear();
     }
 
+    // Filter Properties
+    // Method to filter properties
     public void filterBtnClicked(ActionEvent event) {
         ObservableList<CommercialProperty> filteredProperties = FXCollections.observableArrayList();
 
@@ -225,6 +228,7 @@ public class ViewComPropertiesController {
 
     }
 
+    // Cancel Filter
     public void cancelFilterBtnClicked(ActionEvent event) {
         comPropertyTable.setItems(commercialProperties);
         statusToggleGroup.selectToggle(statusAll);
@@ -251,6 +255,8 @@ public class ViewComPropertiesController {
         return (String) selectedRadioButton.getUserData();
     }
 
+    // View Options
+    // Method to view options
     public void viewOptions(String option) {
         switch (option) {
             case "All Properties":

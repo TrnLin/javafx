@@ -9,6 +9,7 @@
 <?import java.lang.String?>
 <VBox prefHeight="1040.0" prefWidth="1440.0" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.VisitorController">
     <children>
+        <fx:include source="header.fxml" />
         <ChoiceBox fx:id="viewOptions" prefWidth="150.0" styleClass="dropdown-list" value="All Properties">
             <items>
                 <FXCollections fx:factory="observableArrayList">
