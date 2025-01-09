@@ -1,5 +1,7 @@
 package com.example.demo.Auth;
 
+import com.example.demo.Observer.AuthStatus;
+import com.example.demo.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.Date;
 
 public class SignInController {
 
@@ -185,30 +189,29 @@ public class SignInController {
     }
 
     public void login(String email, String password, String selectedRole, ActionEvent event) {
-        // Assuming you have a UserService to handle user authentication
-//        UserService userService = new UserService();
-        try {
-//            User user = userService.authenticateUser(email, password, role);
-//            if (user != null) {
-//                System.out.println("Login successful: " + email);
-//                // Redirect to the home page or dashboard
-//                redirectToHomePage();
-//            } else {
-//                System.err.println("Invalid email, password, or role");
-//                status.setVisible(true);
-//                status.setText("Invalid email, password, or role. Please try again.");
-//            }
+        boolean loginSuccessful = true; // Assume success for now
 
-            // Log role, email, and password (for debugging or logging purposes)
-            System.out.println("Role: " + selectedRole);
-            System.out.println("Email: " + email);
-            System.out.println("Password: " + password);
+//        User user;
+//        try {
+//            user = userService.authenticateUser(email, password, selectedRole); // Perform login
+//            loginSuccessful = true;
+//        } catch (Exception e) {
+//            loginSuccessful = false;
+//            status.setVisible(true);
+//            status.setText("An unexpected error occurred. Please try again.");
+//            System.err.println("Error during login: " + e.getMessage());
+//            e.printStackTrace();
+//            AuthStatus.getInstance().setLoggedIn(false);
+//            return;
+//        }
+
+        if (loginSuccessful) {
+//            User loginUser = new user; // Create a new user object
+            User user = new User("1", "John Doe", new Date(), email, password);
+            AuthStatus.getInstance().setLoginStatus(true, user);
             redirectToHomePage(event);
-        } catch (Exception e) {
-            System.err.println("Error during login: " + e.getMessage());
-            e.printStackTrace();
-            status.setVisible(true);
-            status.setText("An unexpected error occurred. Please try again.");
+        } else {
+            AuthStatus.getInstance().setLoginStatus(false, null);
         }
     }
 
