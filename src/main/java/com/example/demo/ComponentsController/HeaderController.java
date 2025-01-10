@@ -13,12 +13,10 @@ import javafx.stage.Stage;
 
 public class HeaderController implements AuthObserver {
     public Button authBtn;
-    boolean isLoggedIn = false;
 
     @FXML
     public void initialize() {
         AuthStatus.getInstance().addObserver(this);
-        authBtn.setOnAction(e -> checkAuth(e));
 
         if (AuthStatus.getInstance().isLoggedIn()) {
             authBtn.setText("View Info");

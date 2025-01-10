@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefWidth="400.0" spacing="18.0" stylesheets="@/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ComponentsController.PropertyInfoController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Property Id" />
+            <TextField fx:id="propertyIdField" styleClass="input" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Address" />
+            <TextField fx:id="addressField" styleClass="input" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Price" />
+            <TextField fx:id="pricingField" styleClass="input" />
+         </children>
+      </VBox>
+      <VBox>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Status" />
+            <TextField fx:id="statusField" styleClass="input" />
+         </children>
+      </VBox>
+      <Button fx:id="updateInfoBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onUpdateProperty" styleClass="button-main" text="Update information" />
+   </children>
+   <padding>
+      <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+   </padding>
+</VBox>

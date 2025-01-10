@@ -58,6 +58,7 @@
          <children>
             <Button fx:id="changePassBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onChangePassword" styleClass="button-second" text="Change Password" />
             <Button fx:id="updateInfoBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onUpdateInfo" styleClass="button-main" text="Update information" />
+            <Button fx:id="signOutBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSignOut" styleClass="button-second" text="Sign out" />
          </children>
          <VBox.margin>
             <Insets top="16.0" />

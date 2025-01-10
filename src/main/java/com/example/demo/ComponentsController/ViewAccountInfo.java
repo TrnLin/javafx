@@ -3,6 +3,7 @@ package com.example.demo.ComponentsController;
 import com.example.demo.Observer.AuthObserver;
 import com.example.demo.Observer.AuthStatus;
 import com.example.demo.model.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +32,7 @@ public class ViewAccountInfo implements AuthObserver {
     @FXML
     public Button updateInfoBtn;
     public Text updateStatusText;
+    public Button signOutBtn;
 
     @FXML
     public void initialize() {
@@ -151,5 +153,20 @@ public class ViewAccountInfo implements AuthObserver {
         updateStatusText.setVisible(true);
 
         // Update user logic here
+    }
+
+    public void onSignOut(ActionEvent event) {
+        // Handle sign out logic here
+        AuthStatus.getInstance().setLoginStatus(false, null, null);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Auth/login.fxml"));
+            Stage stage = (Stage) signOutBtn.getScene().getWindow();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

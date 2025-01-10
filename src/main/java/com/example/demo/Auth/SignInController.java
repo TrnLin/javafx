@@ -208,10 +208,13 @@ public class SignInController {
         if (loginSuccessful) {
 //            User loginUser = new user; // Create a new user object
             User user = new User("1", "John Doe", new Date(), email, password);
-            AuthStatus.getInstance().setLoginStatus(true, user);
+            AuthStatus.getInstance().setLoginStatus(true, user, selectedRole);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
             redirectToHomePage(event);
+
         } else {
-            AuthStatus.getInstance().setLoginStatus(false, null);
+            AuthStatus.getInstance().setLoginStatus(false, null, null);
         }
     }
 
@@ -224,6 +227,7 @@ public class SignInController {
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
             stage.setScene(scene);
             stage.show();
+     // Close the current window
         } catch (Exception e) {
             // Handle general exceptions
             status.setVisible(true);

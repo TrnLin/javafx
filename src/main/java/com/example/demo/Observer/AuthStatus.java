@@ -9,6 +9,7 @@ public class AuthStatus {
     private static AuthStatus instance;
     private boolean isLoggedIn = false;
     private User currentUser;
+    private String role; // Role is stored independently
     private final List<AuthObserver> observers = new ArrayList<>();
 
     private AuthStatus() {}
@@ -28,9 +29,14 @@ public class AuthStatus {
         return currentUser;
     }
 
-    public void setLoginStatus(boolean isLoggedIn, User user) {
+    public String getRole() {
+        return role;
+    }
+
+    public void setLoginStatus(boolean isLoggedIn, User user, String role) {
         this.isLoggedIn = isLoggedIn;
         this.currentUser = user;
+        this.role = role; // Set the role during login
         notifyObservers();
     }
 

@@ -1,5 +1,6 @@
 package com.example.demo.Properties;
 
+import com.example.demo.ComponentsController.PropertyInfoController;
 import com.example.demo.model.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -63,6 +64,19 @@ public class ViewAllPropertiesController {
             }
         });
 
+        // Add listener to TableView
+        propertyTable.setRowFactory(tv -> {
+            TableRow<Property> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) {
+                    Property clickedProperty = row.getItem();
+                    showPropertyInfo(clickedProperty);
+                }
+            });
+            return row;
+        });
+
+
         // Set up the TableView
         TableColumn<Property, Integer> propertyIdCol = new TableColumn<>("Property ID");
         propertyIdCol.setCellValueFactory(new PropertyValueFactory<>("propertyId"));
@@ -101,17 +115,7 @@ public class ViewAllPropertiesController {
             String line;
             while ((line = reader.readLine()) != null) {
                 // Split by comma for CSV format, considering quotes around address
-                String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-                int ownerId = Integer.parseInt(parts[0]);
-                float pricing = Float.parseFloat(parts[1]);
-                int propertyId = Integer.parseInt(parts[2]);
-                String address = parts[3].replace("\"", "");
-                String status = parts[4];
-
-//                System.out.println("Owner ID: " + ownerId + ", Pricing: " + pricing + ", Property ID: " + propertyId + ", Address: " + address + ", Status: " + status);
-
-                // Create a new Property object
-                Property property = new Property(ownerId, pricing, propertyId, address, status);
+                Property property = getProperty(line);
                 properties.add(property);
             }
 
@@ -120,6 +124,21 @@ public class ViewAllPropertiesController {
             System.err.println("Error reading file: " + e.getMessage());
         }
         return properties;
+    }
+
+    private static Property getProperty(String line) {
+        String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+        int ownerId = Integer.parseInt(parts[0]);
+        float pricing = Float.parseFloat(parts[1]);
+        int propertyId = Integer.parseInt(parts[2]);
+        String address = parts[3].replace("\"", "");
+        String status = parts[4];
+
+//                System.out.println("Owner ID: " + ownerId + ", Pricing: " + pricing + ", Property ID: " + propertyId + ", Address: " + address + ", Status: " + status);
+
+        // Create a new Property object
+        Property property = new Property(ownerId, pricing, propertyId, address, status);
+        return property;
     }
 
     public void searchProperties(ActionEvent event) {
@@ -204,6 +223,28 @@ public class ViewAllPropertiesController {
         RadioButton selectedRadioButton = (RadioButton) statusToggleGroup.getSelectedToggle();
         return (String) selectedRadioButton.getUserData();
     }
+
+    public void showPropertyInfo(Property property) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/Components/propertyInfo.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller of propertyInfo.fxml
+            PropertyInfoController controller = loader.getController();
+
+            // Pass the property data to the controller
+            controller.setProperty(property);
+
+            Stage stage = new Stage();
+            stage.setTitle("Property Information");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     // View Options
     // Method to view options
