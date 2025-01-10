@@ -1,6 +1,6 @@
-com/example/demo/Auth/SignInController.class
+com\example\demo\Auth\SignInController.class
 module-info.class
-com/example/demo/Properties/ViewAllPropertiesController$1.class
-com/example/demo/Auth/SignupController.class
-com/example/demo/Properties/ViewResPropertiesController.class
-com/example/demo/Properties/ViewResPropertiesController$1.class
+com\example\demo\Properties\ViewResPropertiesController.class
+com\example\demo\Properties\ViewResPropertiesController$1.class
+com\example\demo\Auth\SignupController.class
+com\example\demo\Properties\ViewAllPropertiesController$1.class
