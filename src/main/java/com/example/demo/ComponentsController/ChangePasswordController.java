@@ -85,6 +85,9 @@ public class ChangePasswordController implements AuthObserver {
         currentUser.setPassword(newPassField.getText());
         showAlert(Alert.AlertType.INFORMATION, "Password Changed", "Your password has been successfully updated!");
 
+        //Todo: Update user password in the database
+
+
         // Clear fields after a successful change
         clearFields();
     }

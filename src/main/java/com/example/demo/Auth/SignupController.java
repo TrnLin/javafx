@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Date;
+
 public class SignupController {
 
     @FXML
@@ -46,6 +48,9 @@ public class SignupController {
     public PasswordField registPasswordField;
     @FXML// ToggleGroup for role management
     public Button signUpBtn;
+    public TextField registFullnameField;
+    public Label fullnameStatus;
+    public DatePicker dobField;
 
     @FXML
     private CheckBox showPasswordCheckBox; // Checkbox to toggle password visibility
@@ -61,6 +66,7 @@ public class SignupController {
         status.setVisible(false);
         roleStatus.setVisible(false);
         emailStatus.setVisible(false);
+        fullnameStatus.setVisible(false);
 
         // Set values to each RadioButton
         hostRadioButton.setUserData("host");
@@ -89,6 +95,9 @@ public class SignupController {
 
     public void onSignUpButtonClick(ActionEvent event) throws Exception {
         try {
+            // Get the values from the form
+            var fullName = registFullnameField.getText();
+            var dob = java.sql.Date.valueOf(dobField.getValue());
             var email = registEmailTextField.getText();
             var password = registPassField.isVisible() ? registPassField.getText() : registPassTextField.getText();
             var role = roleToggleGroup.getSelectedToggle().getUserData().toString();
@@ -96,12 +105,29 @@ public class SignupController {
             // Validate email, role, and password
             boolean hasError = false;
 
+            // Validate email, role, and password
             if (email.isEmpty()) {
                 emailStatus.setVisible(true);
                 emailStatus.setText("*Email cannot be empty!");
                 hasError = true;
             } else {
                 emailStatus.setVisible(false);
+            }
+
+            if (fullName.isEmpty()) {
+                fullnameStatus.setVisible(true);
+                fullnameStatus.setText("*Full name cannot be empty!");
+                hasError = true;
+            } else {
+                fullnameStatus.setVisible(false);
+            }
+
+            if (dob == null) {
+                fullnameStatus.setVisible(true);
+                fullnameStatus.setText("*Date of birth cannot be empty!");
+                hasError = true;
+            } else {
+                fullnameStatus.setVisible(false);
             }
 
             if (role == null) {
@@ -142,21 +168,21 @@ public class SignupController {
             }
 
 
-            createNewUser(email, password, role, confirmPass, event);
+            createNewUser(fullName, dob, email, password, role, confirmPass, event);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void createNewUser(String email, String password, String role, String confirmPass, ActionEvent event) {
+    public void createNewUser(String fullName, Date dob, String email, String password, String role, String confirmPass, ActionEvent event) {
         // Create a new user
 
 //         UserService userService = new UserService();
         try {
-            // Validate email, role, and password
-//            User user = new User(email, password, role);
-//            if (!user.isValid()) {
+//             Validate email, role, and password
+//            Class<Boolean> user = userService.createUser(fullName, dob, email, password, role);
+//            if (!user) {
 //                status.setVisible(true);
 //                status.setText("Invalid email, password, or role. Please try again.");
 //                return;
@@ -168,6 +194,8 @@ public class SignupController {
             System.out.println("Email: " + email);
             System.out.println("Password: " + password);
             System.out.println("Confirm Password: " + confirmPass);
+            System.out.println("Full Name: " + fullName);
+            System.out.println("Date of Birth: " + dob);
 
             // Redirect to the login page
             redirectToLoginPage(event);

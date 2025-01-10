@@ -136,6 +136,10 @@ public class ViewAccountInfo implements AuthObserver {
         currentUser.setDob(new SimpleDateFormat("yyyy-MM-dd").parse(dob));
         currentUser.setPassword(password);
 
+        //Todo: Update user info in the database
+
+
+
         // Simulate saving updated info (you'd replace this with actual logic)
         System.out.println("Updated Info:");
         System.out.println("Full Name: " + fullName);
