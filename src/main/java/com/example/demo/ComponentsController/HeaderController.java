@@ -28,9 +28,6 @@ public class HeaderController implements AuthObserver {
     @Override
     public void onLoginStatusChanged(boolean isLoggedIn, User currentUser) {
         System.out.println("Login status changed: " + isLoggedIn);
-        if (!isLoggedIn) {
-            redirectToLoginScreen();
-        }
     }
 
     public void checkAuth(ActionEvent event) {

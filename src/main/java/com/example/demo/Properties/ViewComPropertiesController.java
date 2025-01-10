@@ -2,17 +2,13 @@ package com.example.demo.Properties;
 
 import com.example.demo.model.CommercialProperty;
 import com.example.demo.model.Property;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,12 +20,9 @@ public class ViewComPropertiesController {
     public TextField searchInput;
     public Button searchBtn;
     public Button cancelBtn;
-    public ChoiceBox viewOptions;
     public RadioButton statusAvailable;
     public RadioButton statusRented;
     public RadioButton statusUnderMaintenance;
-    public Button resetFilterBtn;
-    public Button test;
     public Button filterBtn;
     public Button cancelFilterBtn;
     public TextField businessTypeInput;
@@ -61,13 +54,6 @@ public class ViewComPropertiesController {
         // Add listener to search button
         searchInput.setOnAction(event -> searchProperties(new ActionEvent()));
 
-        // Add listener to ChoiceBox
-        viewOptions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                viewOptions(newValue);
-            }
-        });
 
         // Commercial Property Table
         TableColumn<CommercialProperty, Integer> comPropertyIdCol = new TableColumn<>("Property ID");
@@ -255,55 +241,4 @@ public class ViewComPropertiesController {
         return (String) selectedRadioButton.getUserData();
     }
 
-    // View Options
-    // Method to view options
-    public void viewOptions(String option) {
-        switch (option) {
-            case "All Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setTitle("All Properties");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            case "Commercial Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewComProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setScene(scene);
-                    stage.setTitle("Commercial Properties");
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            case "Residential Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewResProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setTitle("Residential Properties");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                System.out.println("Invalid option selected");
-                break;
-        }
-    }
 }

@@ -151,23 +151,7 @@ public class SignInController {
     }
 
     public void onGuessButtonClick(ActionEvent event) throws Exception {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
-            Scene scene = new Scene(root);
-            Stage primaryStage = new Stage();
-            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Visitor");
-            primaryStage.show();
-//            ((Node) event.getSource()).getScene().getWindow().hide();
-        } catch (Exception e) {
-            // Handle general exceptions
-            status.setVisible(true);
-            status.setText("An unexpected error occurred. Please try again.");
-            System.err.println("Error: " + e.getMessage());
-            e.printStackTrace();
-
-        }
+       redirectToHomePage(event);
     }
 
     public void onSignUpViewBtnClick(ActionEvent event) throws Exception {
@@ -221,10 +205,11 @@ public class SignInController {
     private void redirectToHomePage(ActionEvent event) {
         // Implement the logic to redirect to the home page or dashboard
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/home.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+            stage.setTitle("Home");
             stage.setScene(scene);
             stage.show();
      // Close the current window

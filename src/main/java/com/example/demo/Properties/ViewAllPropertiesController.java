@@ -24,7 +24,6 @@ public class ViewAllPropertiesController {
     public Button searchBtn;
     public Button cancelBtn;
     public TableView<Property> propertyTable;
-    public ChoiceBox viewOptions;
     public RadioButton statusAvailable;
     public RadioButton statusRented;
     public Button resetFilterBtn;
@@ -32,6 +31,22 @@ public class ViewAllPropertiesController {
     public RadioButton statusAll;
 
     ObservableList<Property> properties = FXCollections.observableArrayList();
+
+    private static Property getProperty(String line) {
+        String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+        int ownerId = Integer.parseInt(parts[0]);
+        float pricing = Float.parseFloat(parts[1]);
+        int propertyId = Integer.parseInt(parts[2]);
+        String address = parts[3].replace("\"", "");
+        String status = parts[4];
+
+//                System.out.println("Owner ID: " + ownerId + ", Pricing: " + pricing + ", Property ID: " + propertyId + ", Address: " + address + ", Status: " + status);
+
+        // Create a new Property object
+        Property property = new Property(ownerId, pricing, propertyId, address, status);
+        return property;
+    }
+
     // Initialize the controller
     public void initialize() {
         System.out.println("Visitor Controller Initialized");
@@ -57,12 +72,7 @@ public class ViewAllPropertiesController {
         searchInput.setOnAction(event -> searchProperties(new ActionEvent()));
 
         // Add listener to ChoiceBox
-        viewOptions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                viewOptions(newValue);
-            }
-        });
+
 
         // Add listener to TableView
         propertyTable.setRowFactory(tv -> {
@@ -124,21 +134,6 @@ public class ViewAllPropertiesController {
             System.err.println("Error reading file: " + e.getMessage());
         }
         return properties;
-    }
-
-    private static Property getProperty(String line) {
-        String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-        int ownerId = Integer.parseInt(parts[0]);
-        float pricing = Float.parseFloat(parts[1]);
-        int propertyId = Integer.parseInt(parts[2]);
-        String address = parts[3].replace("\"", "");
-        String status = parts[4];
-
-//                System.out.println("Owner ID: " + ownerId + ", Pricing: " + pricing + ", Property ID: " + propertyId + ", Address: " + address + ", Status: " + status);
-
-        // Create a new Property object
-        Property property = new Property(ownerId, pricing, propertyId, address, status);
-        return property;
     }
 
     public void searchProperties(ActionEvent event) {
@@ -243,61 +238,6 @@ public class ViewAllPropertiesController {
             e.printStackTrace();
         }
     }
-
-
-
-    // View Options
-    // Method to view options
-    public void viewOptions(String option) {
-        switch (option) {
-            case "All Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setTitle("All Properties");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            case "Commercial Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewComProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setScene(scene);
-                    stage.setTitle("Commercial Properties");
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            case "Residential Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewResProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setTitle("Residential Properties");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                System.out.println("Invalid option selected");
-                break;
-        }
-    }
-
 
 }
 

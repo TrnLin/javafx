@@ -30,7 +30,6 @@ public class ViewResPropertiesController {
     public Button searchBtn;
     public Button cancelBtn;
     public TableView<Property> propertyTable;
-    public ChoiceBox viewOptions;
     public RadioButton statusAvailable;
     public RadioButton statusRented;
     public Button resetFilterBtn;
@@ -83,14 +82,6 @@ public class ViewResPropertiesController {
 
         // Add listener to search button
         searchInput.setOnAction(event -> searchProperties(new ActionEvent()));
-
-        // Add listener to ChoiceBox
-        viewOptions.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                viewOptions(newValue);
-            }
-        });
 
         //Residential Property Table
         TableColumn<ResidentialProperty, Integer> rePropertyIdCol = new TableColumn<>("Property ID");
@@ -282,55 +273,5 @@ public class ViewResPropertiesController {
     public String getPetFriendlyLevel() {
         RadioButton selectedRadioButton = (RadioButton) petFriendlyToggleGroup.getSelectedToggle();
         return (String) selectedRadioButton.getUserData();
-    }
-
-    public void viewOptions(String option) {
-        switch (option) {
-            case "All Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewAllProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setTitle("All Properties");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            case "Commercial Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewComProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setScene(scene);
-                    stage.setTitle("Commercial Properties");
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            case "Residential Properties":
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/com/example/demo/Properties/viewResProperties.fxml"));
-                    Stage stage = (Stage) viewOptions.getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-                    stage.setTitle("Residential Properties");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (Exception e) {
-                    System.err.println("Error: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                System.out.println("Invalid option selected");
-                break;
-        }
     }
 }

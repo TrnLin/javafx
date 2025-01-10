@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.demo.HomeController">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-    <Text layoutX="245.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hi, this is home page"/>
-</AnchorPane>
+<SplitPane dividerPositions="0.5" orientation="HORIZONTAL" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HomeController">
+    <!-- Menu Pane -->
+    <items>
+      <VBox prefWidth="250.0">
+         <children>
+            <GridPane maxHeight="1.7976931348623157E308" prefWidth="202.0" VBox.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                     <children>
+                            <fx:include source="components/authContainer.fxml" GridPane.rowIndex="2" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="8.0">
+                     <children>
+                            <Button fx:id="viewPropertyBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#loadPage1" styleClass="button-second" text="View Property" />
+                            <Button fx:id="viewRentalAgreementsBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#loadPage2" styleClass="button-second" text="View Rental Agreements" />
+                     </children>
+                  </VBox>
+               </children>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+         </padding>
+      </VBox>
+
+        <!-- Content Pane -->
+        <StackPane fx:id="contentPane" style="-fx-padding: 10; -fx-background-color: white;">
+            <children>
+                <fx:include source="Properties/viewAllProperties.fxml" />
+            </children>
+         <padding>
+            <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
+         </padding>
+        </StackPane>
+    </items>
+</SplitPane>

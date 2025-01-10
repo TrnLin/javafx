@@ -17,20 +17,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minViewportWidth="1440.0" prefViewportHeight="1040.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Properties.ViewAllPropertiesController">
+<ScrollPane stylesheets="@/style.css" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minViewportWidth="1440.0" prefViewportHeight="1040.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Properties.ViewAllPropertiesController">
    <content>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="18.0" style="-fx-background-color: white;">
           <children>
-              <fx:include source="../components/header.fxml" />
-              <ChoiceBox fx:id="viewOptions" prefWidth="150.0" styleClass="dropdown-list" value="All Properties">
-                  <items>
-                      <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="All Properties" />
-                          <String fx:value="Commercial Properties" />
-                          <String fx:value="Residential Properties" />
-                      </FXCollections>
-                  </items>
-              </ChoiceBox>
               <GridPane>
                   <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
