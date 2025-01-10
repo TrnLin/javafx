@@ -48,9 +48,14 @@ public class SignupController {
     public PasswordField registPasswordField;
     @FXML// ToggleGroup for role management
     public Button signUpBtn;
+    @FXML
     public TextField registFullnameField;
+    @FXML
     public Label fullnameStatus;
+    @FXML
     public DatePicker dobField;
+    @FXML
+    public Text signupStatus;
 
     @FXML
     private CheckBox showPasswordCheckBox; // Checkbox to toggle password visibility
@@ -67,6 +72,7 @@ public class SignupController {
         roleStatus.setVisible(false);
         emailStatus.setVisible(false);
         fullnameStatus.setVisible(false);
+        signupStatus.setVisible(false);
 
         // Set values to each RadioButton
         hostRadioButton.setUserData("host");
@@ -94,7 +100,6 @@ public class SignupController {
     }
 
     public void onSignUpButtonClick(ActionEvent event) throws Exception {
-        try {
             // Get the values from the form
             var fullName = registFullnameField.getText();
             var dob = java.sql.Date.valueOf(dobField.getValue());
@@ -164,15 +169,16 @@ public class SignupController {
 
             // Stop processing if any field has an error
             if (hasError) {
+                signupStatus.setVisible(true);
+                signupStatus.setText("Please fill in all fields correctly.");
                 return;
             }
 
+            signupStatus.setVisible(false);
 
             createNewUser(fullName, dob, email, password, role, confirmPass, event);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void createNewUser(String fullName, Date dob, String email, String password, String role, String confirmPass, ActionEvent event) {

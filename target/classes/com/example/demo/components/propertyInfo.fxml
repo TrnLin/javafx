@@ -35,6 +35,7 @@
          </children>
       </VBox>
       <Button fx:id="updateInfoBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onUpdateProperty" styleClass="button-main" text="Update information" />
+      <Button fx:id="deleteBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="button-second" text="Delete Property" />
    </children>
    <padding>
       <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />

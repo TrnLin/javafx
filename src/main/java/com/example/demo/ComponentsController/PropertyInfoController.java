@@ -20,6 +20,7 @@ public class PropertyInfoController implements AuthObserver {
     @FXML
     public TextField statusField;
     public Button updateInfoBtn;
+    public Button deleteBtn;
 
     private User currentUser;
 
@@ -62,11 +63,7 @@ public class PropertyInfoController implements AuthObserver {
 
     private void updateAccess() {
         String role = AuthStatus.getInstance().getRole();
-        if ("owner".equalsIgnoreCase(role)) {
-            setFieldsEditable(true);
-        } else {
-            setFieldsEditable(false);
-        }
+        setFieldsEditable("owner".equalsIgnoreCase(role) || "manager".equalsIgnoreCase(role));
     }
 
     private void setFieldsEditable(boolean editable) {
@@ -87,6 +84,7 @@ public class PropertyInfoController implements AuthObserver {
         pricingField.setDisable(!editable);
         statusField.setDisable(!editable);
         updateInfoBtn.setDisable(!editable);
+        deleteBtn.setDisable(!editable);
 
     }
 
@@ -108,4 +106,11 @@ public class PropertyInfoController implements AuthObserver {
         chosenProperty.setStatus(status);
 
     }
+
+    public void onDeleteProperty(ActionEvent event) {
+        //Todo: Implement delete property logic
+        System.out.println("Delete property logic");
+    }
+
+
 }
