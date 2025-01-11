@@ -11,8 +11,8 @@ module com.example.demo {
     opens com.example.demo.Properties to javafx.fxml;
     exports com.example.demo.Auth;
     opens com.example.demo.Auth to javafx.fxml;
-    exports com.example.demo.Observer;
-    opens com.example.demo.Observer to javafx.fxml;
+    exports com.example.demo.Auth.Observer;
+    opens com.example.demo.Auth.Observer to javafx.fxml;
     exports com.example.demo.ComponentsController;
     opens com.example.demo.ComponentsController to javafx.fxml;
 

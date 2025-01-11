@@ -1,7 +1,7 @@
 package com.example.demo.ComponentsController;
 
-import com.example.demo.Observer.AuthObserver;
-import com.example.demo.Observer.AuthStatus;
+import com.example.demo.Auth.Observer.AuthObserver;
+import com.example.demo.Auth.Observer.AuthStatus;
 import com.example.demo.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

@@ -1,4 +1,4 @@
-package com.example.demo.Observer;
+package com.example.demo.Auth.Observer;
 
 import com.example.demo.model.User;
 
